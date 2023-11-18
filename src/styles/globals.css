@@ -13,7 +13,7 @@
 		--popover: hsl(0 0% 100%);
 		--popover-foreground: hsl(224 71.4% 4.1%);
 
-		--primary: hsl(220.9 39.3% 11%);
+		--primary: hsl(218, 76%, 50%);
 		--primary-foreground: hsl(210 20% 98%);
 
 		--secondary: hsl(220 14.3% 95.9%);
@@ -45,7 +45,7 @@
 		--popover: hsl(224 71.4% 4.1%);
 		--popover-foreground: hsl(210 20% 98%);
 
-		--primary: hsl(210 20% 98%);
+		--primary: hsl(218, 83%, 55%);
 		--primary-foreground: hsl(220.9 39.3% 11%);
 
 		--secondary: hsl(215 27.9% 16.9%);
@@ -72,5 +72,11 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+	}
+
+	html,
+	body,
+	#__next {
+		@apply h-full w-full;
 	}
 }
