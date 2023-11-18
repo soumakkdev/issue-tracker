@@ -9,3 +9,55 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id     Int    @id @default(autoincrement())
+  name   String
+  email  String
+  avatar String
+
+  // role 
+}
+
+model Project {
+  id     Int     @id @default(autoincrement())
+  name   String
+  icon   String?
+  tags   Tag[]
+  issues Issue[]
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String
+  color String
+
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+
+  issue   Issue? @relation(fields: [issueId], references: [id])
+  issueId Int?
+}
+
+model Issue {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+  tags        Tag[]
+  priority    Int // High Priority - 2, Low Priority - 0
+  dueDate     String
+  status      String // Todo, In progress, Completed, Resolved, Closed
+
+  comments Comment[]
+
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+}
+
+model Comment {
+  id   Int    @id @default(autoincrement())
+  text String
+
+  issue   Issue @relation(fields: [issueId], references: [id])
+  issueId Int
+}
