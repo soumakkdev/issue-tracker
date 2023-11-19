@@ -20,11 +20,13 @@ model User {
 }
 
 model Project {
-  id     Int     @id @default(autoincrement())
-  name   String
-  icon   String?
-  tags   Tag[]
-  issues Issue[]
+  id        Int      @id @default(autoincrement())
+  name      String
+  icon      String?
+  tags      Tag[]
+  issues    Issue[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Tag {
@@ -40,17 +42,18 @@ model Tag {
 }
 
 model Issue {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   description String?
   tags        Tag[]
   priority    Int // High Priority - 2, Low Priority - 0
   dueDate     String
   status      Int // Todo, In progress, Completed, Resolved, Closed
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  comments Comment[]
-
-  project   Project @relation(fields: [projectId], references: [id])
+  comments  Comment[]
+  project   Project   @relation(fields: [projectId], references: [id])
   projectId Int
 }
 

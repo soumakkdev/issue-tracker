@@ -12,7 +12,7 @@ export async function fetchWithAuth(method: 'GET' | 'POST' | 'PUT' | 'DELETE', u
 			headers.Authorization = `Bearer ${cookies.token}`
 		}
 
-		const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
+		const res = await fetch(`${url}`, {
 			method,
 			body: JSON.stringify(body),
 			headers,
