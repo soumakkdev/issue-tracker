@@ -46,7 +46,7 @@ model Issue {
   tags        Tag[]
   priority    Int // High Priority - 2, Low Priority - 0
   dueDate     String
-  status      String // Todo, In progress, Completed, Resolved, Closed
+  status      Int // Todo, In progress, Completed, Resolved, Closed
 
   comments Comment[]
 
