@@ -11,16 +11,20 @@ export interface IInputBox extends InputProps {
 }
 
 export const InputBox = (props: IInputBox) => {
-	const { error, label, required, startIcon, className, helpMessage, ...rest } = props
+	const { error, label, required, startIcon, className, helpMessage, id, ...rest } = props
 
 	return (
 		<div>
-			{label ? <Label>{label}</Label> : null}
+			{label ? (
+				<Label className="mb-2 block" htmlFor={id}>
+					{label}
+				</Label>
+			) : null}
 
 			<div className="relative">
 				{startIcon ? <div className="absolute inset-y-0 left-0 flex items-center pl-2">{startIcon}</div> : null}
 
-				<Input className={cn({ 'pl-8': !!startIcon, 'ring-red-500 ring-1': error }, className)} {...rest} />
+				<Input id={id} className={cn({ 'pl-8': !!startIcon, 'ring-red-500 ring-1': error }, className)} {...rest} />
 			</div>
 
 			{error ? (

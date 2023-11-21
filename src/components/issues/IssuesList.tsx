@@ -1,5 +1,9 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { IssuesTable } from './IssuesTable'
+import { Button } from '../ui/button'
+import { Plus } from 'lucide-react'
+import { useIssues } from './Issues.data'
+import { useRouter } from 'next/router'
 
 type Payment = {
 	id: string
@@ -40,8 +44,20 @@ const columns: ColumnDef<Payment>[] = [
 ]
 
 export default function IssuesList() {
+	const { query } = useRouter()
+	const projectId = query?.projectId as string
+	const { data: issues } = useIssues(projectId)
+	console.log(issues)
 	return (
 		<div className="container py-5">
+			<div className="flex items-center justify-between">
+				<h2 className="text-2xl font-bold mb-4">Issues</h2>
+				<Button className="gap-2 pl-3">
+					<Plus className="h-4 w-4" />
+					Issue
+				</Button>
+			</div>
+
 			<IssuesTable columns={columns} data={data} />
 		</div>
 	)

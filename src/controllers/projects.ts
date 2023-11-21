@@ -28,14 +28,14 @@ export async function createProject(req: NextApiRequest, res: NextApiResponse) {
 
 export async function updateProject(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const { id } = req.query
+		const { projectId } = req.query
 		const { name } = req.body as ICreateProjectReq
 		const project = await prisma.project.update({
 			data: {
 				name,
 			},
 			where: {
-				id: toInt(id),
+				id: toInt(projectId),
 			},
 		})
 		res.status(200).json({ data: project, success: true })
@@ -46,10 +46,10 @@ export async function updateProject(req: NextApiRequest, res: NextApiResponse) {
 
 export async function deleteProject(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const { id } = req.query
+		const { projectId } = req.query
 		const project = await prisma.project.delete({
 			where: {
-				id: toInt(id),
+				id: toInt(projectId),
 			},
 		})
 		res.status(200).json({ data: project, success: true })

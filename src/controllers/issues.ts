@@ -14,10 +14,10 @@ export async function getIssues(req: NextApiRequest, res: NextApiResponse) {
 
 export async function getIssue(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const { id } = req.query
+		const { issueId } = req.query
 		const issue = await prisma.issue.findMany({
 			where: {
-				id: toInt(id),
+				id: toInt(issueId),
 			},
 		})
 		res.status(200).json({ data: issue, success: true })
@@ -47,7 +47,7 @@ export async function createIssue(req: NextApiRequest, res: NextApiResponse) {
 
 export async function updateIssue(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const { id } = req.query
+		const { issueId } = req.query
 		const { name, description, dueDate, priority, status } = req.body as IUpdateIssueReq
 		const issue = await prisma.issue.update({
 			data: {
@@ -58,7 +58,7 @@ export async function updateIssue(req: NextApiRequest, res: NextApiResponse) {
 				description,
 			},
 			where: {
-				id: toInt(id),
+				id: toInt(issueId),
 			},
 		})
 		res.status(200).json({ data: issue, success: true })
@@ -69,10 +69,10 @@ export async function updateIssue(req: NextApiRequest, res: NextApiResponse) {
 
 export async function deleteIssue(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const { id } = req.query
+		const { issueId } = req.query
 		const issue = await prisma.issue.delete({
 			where: {
-				id: toInt(id),
+				id: toInt(issueId),
 			},
 		})
 		res.status(200).json({ data: issue, success: true })
